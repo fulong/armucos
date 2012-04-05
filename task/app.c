@@ -42,7 +42,7 @@ INT32S main(void)
 for(i=0;i<12;i++){
 	num_to_char(buf[i],p_char);
 //	p_char[0] = (buf[0]%10)+'0';
-	putc_string((INT8S*)p_char);
+	putc_string(p_char);
 
 }
 

@@ -115,7 +115,7 @@ software_interrupt:
 //        get_bad_stack
 //        bad_save_user_regs
 //        bl      do_software_interrupt
-		bl software_interrupt
+		b OS_TASK_SW
         .align  5
 prefetch_abort:
 //        get_bad_stack

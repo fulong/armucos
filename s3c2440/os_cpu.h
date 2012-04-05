@@ -104,9 +104,9 @@ typedef unsigned short OS_CPU_SR;                /* Define size of CPU status re
 
 #define  OS_STK_GROWTH        1                       /* Stack grows from HIGH to LOW memory on 80x86  */
 
-#define  uCOS                 0x80                    /* Interrupt vector # used for context switch    */
+//#define  uCOS                 0x80                    /* Interrupt vector # used for context switch    */
 
-#define  OS_TASK_SW()         //asm  INT   uCOS
+#define  OS_TASK_SW()         __asm__ __volatile__("swi 0x80":::);//asm  INT   uCOS
 
 /*
 *********************************************************************************************************
