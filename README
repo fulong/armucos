@@ -1,0 +1,44 @@
+arm_ucos目录结构：
+-------dev			: 裸机时，某些特殊寄存器的用法，跟ucos时的驱动所在目录		
+
+-------lib			:C函数库
+	+string.c		:一些操作字符的函数如，memset等
+	
+-------elf_output	:.elf反汇编文件统一输出的地方
+
+-------output		:.o文件统一输出地方
+
+-------s3c2440		:与cpu有关的代码，在移植的时候要改写
+   +os_cpu_a.asm
+   +os_cpu_c.c
+   +os_cpu.h
+
+-------ucos_src		:与cpu无关的代码，主要是部分内核代码跟数据结构上的代码
+   +os_core.c
+   +os_flag.c
+   +os_mbox.c
+   +os_mem.c
+   +os_mutex.c
+   +os_q.c
+   +os_sem.c
+   +os_task.c
+   +os_time.c
+   +ucos_ii.h
+
+-------task_configure		:主要是关于任务的代码，任务通过配置文件，进行对内核的裁剪
+   +include.h
+   +os_cfg.h
+
+-------start_code			:项目的启动代码目录
+   +start.S
+
+-------task					:用户代码目录
+
+
++Makefile					:项目工程编译文件
+每一个目录中差不多都会有一个makefile，这是为了管理各目录中代码管理。
+
+var.mk						:保存makefile文件中所需要的全局变量
+
+目标:all			:生成移植后的ucos
+目标:clean			:这个是一个伪目标，主要是用来清楚output与elf_output文件夹中的文件
