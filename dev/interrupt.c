@@ -131,6 +131,7 @@
 
 //#	define TIMER0
 #	define UART0
+#	define TIMER4
 
 
 void irq_init(void)
@@ -142,6 +143,11 @@ void irq_init(void)
 	#ifdef UART0
 	INTMSK &= (~UART0_INT_MSK);
 	INTSUBMSK &= (~(SUB_RXD0_MSK));
+	#endif
+
+	#ifdef TIMER4
+	INTMSK &= (~T4_INT_MSK);
+	INTMOD = T4_INT_MSK;
 	#endif
 
 }

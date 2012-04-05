@@ -29,14 +29,12 @@
 INT32S main(void)
 {
 	INT8U *buf;
-	buf = (INT8U *)0x30030000;
+	buf = (INT8U *)0x30000000;
 	INT8U p_char[13]={'0','x','0','0','0','0','0','0','0','0','\r','\n',0};
 	INT32U i;
 	uart0_init(115200);
-	led_init();
-//	timer0_init();
+//	timer4_init();
 	irq_init();
-
 	nand_init();
 	nand_read(buf,0,12);
 for(i=0;i<12;i++){

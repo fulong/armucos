@@ -55,7 +55,7 @@ void clock_init(void)
  * */
 
 #	define Prescaler0			124 //timer0和1用
-#	define Prescaler1			/*还没有用到，timer2和3，4用*/
+#	define Prescaler1			124 << 8/*还没有用到，timer2和3，4用*/
 /* divno:						tnum
  * 			0----2分频			0-----代表第0个timer
  * 			1----4分频			如此类推
@@ -69,7 +69,7 @@ void clock_init(void)
 #	define timer0_en				1		//启动定时器
 #	define timer0_dead_en			0		//死区允许
 #	define timer0_outinver_en		0		//TOUT0 翻转
-#	define timer0_update_en			1		//更新TCNTB0 TCMPB0
+#	define update_en			1		//更新TCNTB0 TCMPB0
 #	define timer0_auto_en			1		//自动加载
 #	define timer0_start				\
 		TCON &= ~(0X1f);\
@@ -85,7 +85,25 @@ void timer0_init(void)
 	TCFG0 |= Prescaler0 ;//124
 	set_divider(2,0)
 	TCNTB0 = 50000; //1S 中断一次
-	TCON |= timer0_update_en<<1;	//启动定时器时自动加载TCNTB0到TCNT0，当下次使用TCON时，这位会自动清零
+	TCON |= update_en<<1;	//启动定时器时自动加载TCNTB0到TCNT0，当下次使用TCON时，这位会自动清零
 
 	timer0_start
+}
+#	define timer4_en				(1 << 20)
+#	define timer4_auto_en			(1 << 22)
+
+#	define timer4_start				\
+		TCON &= ~(0X7 << 20);\
+		TCON |= timer4_en + \
+				(timer4_auto_en << 3);
+
+void timer4_init(void)
+{
+	TCFG0 &= ~(0xFF << 8) ;
+	TCFG0 |= Prescaler1 ;//124
+	set_divider(2,4)
+	TCNTB4 = 50000; //1S 中断一次
+	TCON |= update_en << 21;	//启动定时器时自动加载TCNTB4到TCNT4，当下次使用TCON时，这位会自动清零
+
+	timer4_start
 }

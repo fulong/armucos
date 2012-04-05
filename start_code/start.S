@@ -58,15 +58,15 @@ start_code:
 		ldr 	sp, =1024*4
 		bl clock_init
 		bl sdram_init
-		bl copy_steppingstone_to_sdram
-		ldr pc,=on_sdram
-on_sdram:
-		ldr sp,=0x34000000
+//		bl copy_steppingstone_to_sdram
+//		ldr pc,=on_sdram
+//on_sdram:
+//		ldr sp,=0x34000000
 		bl main
 halt:
 		bl halt
 
-copy_steppingstone_to_sdram:
+/*copy_steppingstone_to_sdram:
 		mov r1,#0
 		ldr r2,=SDRAM_BASE
 		mov r3,#4096 @steppingstone的大小
@@ -75,7 +75,7 @@ copy_steppingstone_to_sdram:
 		str r4,[r2],#4
 		cmp r1,r3
 		bne 1b
-		mov pc,lr
+		mov pc,lr*/
 sdram_init:
 		mov r1,#MEM_CTL_BASE
 		adrl r2,mem_cfg_val

@@ -6,6 +6,7 @@
 
 extern void clock_init(void);
 extern void timer0_init(void);
+extern void timer4_init(void);
 
 
 #endif

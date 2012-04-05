@@ -1,7 +1,7 @@
 ENTRY(_start)
 SECTIONS
 {
-	. = 0x30000000;
+	. = 0x00000000;
 	.text : {
 		start.o	(.text)
 		clock.o	(.text)
@@ -12,7 +12,7 @@ SECTIONS
 		uart.o	(.text)
 		debug.o	(.text)
 		interrupt.o	(.text)
-		led.o	(.text)
+		app.o	(.text)
 		*(.text)
 		}
 	.data : {*(.data)}
