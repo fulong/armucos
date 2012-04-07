@@ -18,13 +18,13 @@
 #include "debug.h"
 #ifdef	__DEBUG__
 
-void putc_string(const char * str){
-	INT8U i ,k;
+
+void putc_string(char * str){
+	size_t i ,k;
 	i = strlen(str);
 	for(k = 0;k < i;k++)
 	{
-		UTXH0 = *(str+k);
-		while(!(UTRSTAT0 & (1<<2)));
+		put_char(*(str+k))
 	}
 
 }

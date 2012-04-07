@@ -1,5 +1,28 @@
 //设置向量表
 #include "memory.h"
+#include "2440addr.h"
+#include "clock_option.h"
+
+//Pre-defined constants
+
+#define USERMODE             0x10
+#define FIQMODE              0x11
+#define IRQMODE              0x12
+#define SVCMODE              0x13
+#define ABORTMODE            0x17
+#define UNDEFMODE            0x1b
+#define MODEMASK             0x1f
+#define NOINT                0xc0
+
+//The location of stacks
+
+#define UserStack            (_STACK_BASEADDRESS-0x3800)     //0x33ff4800 ~
+#define SVCStack             (_STACK_BASEADDRESS-0x2800)     //0x33ff5800 ~
+#define UndefStack           (_STACK_BASEADDRESS-0x2400)     //0x33ff5c00 ~
+#define AbortStack           (_STACK_BASEADDRESS-0x2000)     //0x33ff6000 ~
+#define IRQStack             (_STACK_BASEADDRESS-0x1000)     //0x33ff7000 ~
+#define FIQStack             (_STACK_BASEADDRESS-0x0)        //0x33ff8000 ~
+
 .arm
 .globl _start
 _start: b       start_code
@@ -23,46 +46,87 @@ _fiq:                   .word fiq
 
 
 start_code:
-        /*
-         * set the cpu to SVC32 mode
-         */
-        mrs     r0, cpsr
-        bic     r0, r0, #0x1f
-        orr     r0, r0, #0xd3
-        msr     cpsr, r0
 
-#  define pWTCON        0x53000000
-#  define INTMSK        0x4A000008      /* Interrupt-Controller base addresses */
-#  define INTSUBMSK     0x4A00001C
-//#  define CLKDIVN       0x4C000014      /* clock divisor register */
+	ldr     r0,=WTCON       //watch dog disable
+	ldr     r1,=0x0
+	str     r1,[r0]
 
+   	ldr     r0,=INTMSK
+	ldr     r1,=0xffffffff  //all interrupt disable
+	str     r1,[r0]
 
-        ldr     r0, =pWTCON
-        mov     r1, #0x0
-        str     r1, [r0]
+	ldr     r0,=INTSUBMSK
+	ldr     r1,=0x7fff      //all sub interrupt disable
+	str     r1,[r0]
 
-        /*
-         * mask all IRQs by setting all bits in the INTMR - default
-         */
-        mov     r1, #0xffffffff
-        ldr     r0, =INTMSK
-        str     r1, [r0]
+	//To reduce PLL lock time, adjust the LOCKTIME register.
+	ldr     r0,=LOCKTIME
+	ldr     r1,=0xffffff
+	str     r1,[r0]
 
-        ldr     r1, =0x3ff
-        ldr     r0, =INTSUBMSK
-        str     r1, [r0]
+	ldr     r0,=CLKDIVN
+	ldr     r1,=CLKDIV_VAL          // 0=1:1:1, 1=1:1:2, 2=1:2:2, 3=1:2:4, 4=1:4:4, 5=1:4:8, 6=1:3:3, 7=1:3:6.
+	str     r1,[r0]
 
-		msr cpsr_c,#0xd2
-		ldr sp,=3072
-		msr cpsr_c,#0x5f
-		ldr 	sp, =1024*4
-		bl clock_init
-		bl sdram_init
+.if	CLKDIV_VAL > 1 // means Fclk:Hclk is not 1:1.
+	mrc p15,0,r0,c1,c0,0
+	orr r0,r0,#0xc0000000//R1_nF:OR:R1_iA
+	mcr p15,0,r0,c1,c0,0
+.else
+	mrc p15,0,r0,c1,c0,0
+	bic r0,r0,#0xc0000000//R1_iA:OR:R1_nF
+	mcr p15,0,r0,c1,c0,0
+.endif
+
+	//Configure UPLL
+	ldr     r0,=UPLLCON
+	ldr     r1,=((U_MDIV<<12)+(U_PDIV<<4)+U_SDIV)   //Fin = 12.0MHz, UCLK = 48MHz
+	str     r1,[r0]
+	nop     // at least 7-clocks delay must be inserted for setting hardware be completed.
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	 //Configure MPLL
+	ldr     r0,=MPLLCON
+	ldr     r1,=((M_MDIV<<12)+(M_PDIV<<4)+M_SDIV)       //Fin = 12.0MHz, FCLK = 200MHz
+	str     r1,[r0]
+
+	bl sdram_init
+
+	bl InitStacks
+
+//===========================================================
+
+	ldr     r0, =BWSCON
+	ldr     r0, [r0]
+	ands    r0, r0, #6     //OM[1:0] != 0, NOR FLash boot
+	ldrne   pc,=_main           //do not read nand flash
+	adr     r0, start_code //OM[1:0] == 0, NAND FLash boot
+	cmp     r0, #0x40                          //if use Multi-ice,
+	ldrne   pc,=_main           //do not read nand flash
+        //
+//===========================================================
+nand_boot_beg:
+	bl		RdNF2SDRAM
+
+  	mrs     r0,cpsr
+	bic     r0,r0,#MODEMASK
+	orr     r1,r0,#USERMODE
+	bic		r1,r1,#NOINT
+	msr     cpsr_cxsf,r1            //UserMode
+	ldr     sp, =UserStack          // UserStack=0x33FF_5C00
+
+	ldr		lr, =start_os
+	ldr		pc, =_main
+start_os:
+	bl		main
+	ldr     pc, =halt
+//===========================================================
 //		bl copy_steppingstone_to_sdram
 //		ldr pc,=on_sdram
-//on_sdram:
-//		ldr sp,=0x34000000
-		bl main
 halt:
 		bl halt
 
@@ -75,7 +139,8 @@ halt:
 		str r4,[r2],#4
 		cmp r1,r3
 		bne 1b
-		mov pc,lr*/
+		mov pc,lr
+*/
 sdram_init:
 		mov r1,#MEM_CTL_BASE
 		adrl r2,mem_cfg_val
@@ -101,6 +166,41 @@ mem_cfg_val:
 		.long BANKSIZE_SET
 		.long MRSRBx_SET
 		.long MRSRBx_SET
+
+
+
+InitStacks:
+        mrs     r0,cpsr
+        bic     r0,r0,#MODEMASK
+        orr     r1,r0,#UNDEFMODE
+        orr		r1,r1,#NOINT
+        msr     cpsr_cxsf,r1            //UndefMode
+        ldr     sp,=UndefStack          // UndefStack=0x33FF_5C00
+
+        orr     r1,r0,#ABORTMODE
+        orr		r1,r1,#NOINT
+        msr     cpsr_cxsf,r1            //AbortMode
+        ldr     sp,=AbortStack          // AbortStack=0x33FF_6000
+
+        orr     r1,r0,#IRQMODE
+        orr		r1,r1,#NOINT
+        msr     cpsr_cxsf,r1            //IRQMode
+        ldr     sp,=IRQStack           // IRQStack=0x33FF_7000
+
+        orr     r1,r0,#FIQMODE
+        orr		r1,r1,#NOINT
+        msr     cpsr_cxsf,r1            //FIQMode
+        ldr     sp,=FIQStack           // FIQStack=0x33FF_8000
+
+        orr     r1,r0,#SVCMODE
+        orr		r1,r1,#NOINT
+        msr     cpsr_cxsf,r1            //SVCMode
+        ldr     sp,=SVCStack            // SVCStack=0x33FF_5800
+
+        //USER mode has not be initialized.
+
+	   mov     pc,lr
+       //The LR register will not be valid if the current mode is not SVC mode.
 /*
  * exception handlers
  */
@@ -115,7 +215,8 @@ software_interrupt:
 //        get_bad_stack
 //        bad_save_user_regs
 //        bl      do_software_interrupt
-		b OS_TASK_SW
+        bl      software_interrupt
+//		b OS_TASK_SW
         .align  5
 prefetch_abort:
 //        get_bad_stack
@@ -158,16 +259,18 @@ fiq:
         .align  5
 irq:
 //        get_bad_stack
-		sub lr,lr,#4
 //        bad_save_user_regs
-		stmdb sp!,{r0-r12,lr}
 //        bl      do_irq
-		bl irq_handle
-		ldmia sp!,{r0-r12,pc}^
+//		bl irq_handle
+		bl irq
         .align  5
 fiq:
 //        get_bad_stack
 //        bad_save_user_regs
 //        bl      do_fiq
-		bl fiq
+		sub lr,lr,#4
+		stmdb sp!,{r0-r7,lr}
+		bl fiq_handle
+		ldmia sp!,{r0-r7,pc}^
+/*		bl fiq*/
 #endif

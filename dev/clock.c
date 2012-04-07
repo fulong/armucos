@@ -1,8 +1,5 @@
 #include "clock.h"
 /*如果同时配置UPLL时，要先设置UPLL，并相隔7个NOP*/
-#define	M_MDIV	92			//Fin=12M,Fout=200M
-#define M_PDIV	4			//FCLK = 2*m*Fin/(p*2^s)
-#define M_SDIV	1
 
 /****************************************************
  * 2位		1位
@@ -21,29 +18,7 @@
  * 2 		1		0/1						1:8:16
  * HCLK3_HALF/HCLK4_HALF是CAMDIVN寄存器的8，9位
  */
-#define HDIVN 1
-#define PDIVN 1
-void clock_init(void)
-{
-	CLKDIVN = (HDIVN << 1) + PDIVN ;
-	/* mmu_setAsyncBusMode
-	 * 在<<嵌入式linux应用开发>>161页，当s3c2440，HDIVN非零时，
-	 * cpu应从fast bus mode 变成 asynchronous bus mode否则
-	 * cpu的工作频率自动变为HCLK，而不是FCLK
-	 *
-	 * */
-	__asm__ __volatile__(
-			"mrc p15,0,r0,c1,c0,0\n"
-			"orr r0,r0,#0xC0000000\n"
-			"mcr p15,0,r0,c1,c0,0\n"
-			:
-			:
-			:
-	);
-	//200M
-	MPLLCON = ((M_MDIV << 12)+(M_PDIV << 4)+M_SDIV) ;
 
-}
 
 /*
  * Timer input timer frequency = PCLK / (Prescaler value + 1)/{divider value}
@@ -94,8 +69,8 @@ void timer0_init(void)
 
 #	define timer4_start				\
 		TCON &= ~(0X7 << 20);\
-		TCON |= timer4_en + \
-				(timer4_auto_en << 3);
+		TCON |= (timer4_en + \
+				timer4_auto_en);
 
 void timer4_init(void)
 {

@@ -64,7 +64,7 @@
 #	define UART2_INT_MSK			(1<<UART2_OFFSET)
 
 #	define T4_OFFSET				14
-#	define T4_INT_MSK				1<<T4_OFFSET
+#	define T4_INT_MSK				(1<<T4_OFFSET)
 
 #	define T3_OFFSET				13
 #	define T3_INT_MSK				(1<<T3_OFFSET)
@@ -130,7 +130,7 @@
 /*SUBMASK SUBSRCPND*/
 
 //#	define TIMER0
-#	define UART0
+//#	define UART0
 #	define TIMER4
 
 
@@ -140,15 +140,16 @@ void irq_init(void)
 	INTMSK &= (~T0_INT_MSK);
 	#endif
 
+	#ifdef TIMER4
+	INTMSK &= (~T4_INT_MSK);
+	INTMOD = T4_INT_MSK;
+	#endif
+
 	#ifdef UART0
 	INTMSK &= (~UART0_INT_MSK);
 	INTSUBMSK &= (~(SUB_RXD0_MSK));
 	#endif
 
-	#ifdef TIMER4
-	INTMSK &= (~T4_INT_MSK);
-	INTMOD = T4_INT_MSK;
-	#endif
 
 }
 
@@ -197,3 +198,13 @@ void uart0_irq(void)
     INTPND = temp;
 }
 
+void fiq_handle(void)
+{
+	INT32U temp;
+    GPBDAT = ~(GPBDAT & (0xf << 5));
+    //清中断
+    SRCPND = 1 << T4_OFFSET;
+    temp = INTPND;
+    INTPND = temp;
+
+}

@@ -28,21 +28,9 @@
 
 INT32S main(void)
 {
-	INT8U *buf;
-	buf = (INT8U *)0x30000000;
-	INT8U p_char[13]={'0','x','0','0','0','0','0','0','0','0','\r','\n',0};
-	INT32U i;
-	uart0_init(115200);
-//	timer4_init();
-	irq_init();
-	nand_init();
-	nand_read(buf,0,12);
-for(i=0;i<12;i++){
-	num_to_char(buf[i],p_char);
-//	p_char[0] = (buf[0]%10)+'0';
-	putc_string(p_char);
-
-}
-
+#ifdef __DEBUG__
+	putc_string("\n\r");
+	putc_string("now be into the ucos");
+#endif
 	return 0;
 }

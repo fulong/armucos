@@ -12,7 +12,8 @@ void* memset(void* s, int c, size_t n)
 
 size_t strlen(const char * str){
 	size_t count=0;
-	while(*str++ != 0){
+	char * p = (char *)str;
+	while(*p++ != 0){
 		count++;
 	}
 	return count;

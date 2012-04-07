@@ -23,9 +23,12 @@
 #include "../dev/uart.h"
 
 
+#define put_char(ch) 		UTXH0 = (ch);\
+		while(!(UTRSTAT0 & (1<<2)));
 
-extern void putc_string(const char * str);
-INT8U num_to_char(INT32U num,INT8U * display_num);
+
+extern void putc_string(char * str);
+extern INT8U num_to_char(INT32U num,INT8U * display_num);
 
 
 #endif /* DEBUG_H_ */
