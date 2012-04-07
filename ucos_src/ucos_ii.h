@@ -23,7 +23,7 @@
 #define  HCLK				100000000
 #define  FCLK				200000000
 #define  OS_VERSION              252                    /* Version of uC/OS-II (Vx.yy mult. by 100)    */
-//#define  OS_GLOBALS                                  /* Version of uC/OS-II (Vx.yy mult. by 100)    */
+#define  OS_GLOBALS                                  /* Version of uC/OS-II (Vx.yy mult. by 100)    */
 
 #ifdef   OS_GLOBALS
 #define  OS_EXT

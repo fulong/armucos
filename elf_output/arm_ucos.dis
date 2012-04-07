@@ -778,7 +778,7 @@ Disassembly of section .text:
 30000a88:	e8bd4038 	pop	{r3, r4, r5, lr}
 30000a8c:	e12fff1e 	bx	lr
 30000a90:	02faf080 	rscseq	pc, sl, #128	; 0x80
-30000a94:	300051a4 	andcc	r5, r0, r4, lsr #3
+30000a94:	300065b8 			; <UNDEFINED> instruction: 0x300065b8
 
 30000a98 <uart0_putc>:
 30000a98:	e52d4004 	push	{r4}		; (str r4, [sp, #-4]!)
@@ -808,8 +808,8 @@ Disassembly of section .text:
 30000af8:	1affffef 	bne	30000abc <uart0_putc+0x24>
 30000afc:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
 30000b00:	e12fff1e 	bx	lr
-30000b04:	300051a4 	andcc	r5, r0, r4, lsr #3
-30000b08:	30005164 	andcc	r5, r0, r4, ror #2
+30000b04:	300065b8 			; <UNDEFINED> instruction: 0x300065b8
+30000b08:	30006578 	andcc	r6, r0, r8, ror r5
 
 30000b0c <putc_string>:
 30000b0c:	e92d4010 	push	{r4, lr}
@@ -1015,9 +1015,9 @@ Disassembly of section .text:
 30000dfc:	05c32000 	strbeq	r2, [r3]
 30000e00:	e8bd0030 	pop	{r4, r5}
 30000e04:	e12fff1e 	bx	lr
-30000e08:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-30000e0c:	30005aac 	andcc	r5, r0, ip, lsr #21
-30000e10:	30005aa8 	andcc	r5, r0, r8, lsr #21
+30000e08:	30005a74 	andcc	r5, r0, r4, ror sl
+30000e0c:	30005a68 	andcc	r5, r0, r8, ror #20
+30000e10:	30005a64 	andcc	r5, r0, r4, ror #20
 
 30000e14 <OSFlagAccept>:
 30000e14:	e250c000 	subs	ip, r0, #0
@@ -1150,8 +1150,8 @@ Disassembly of section .text:
 30001008:	e3e02065 	mvn	r2, #101	; 0x65
 3000100c:	e5c12000 	strb	r2, [r1]
 30001010:	e12fff1e 	bx	lr
-30001014:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30001018:	3000657c 	andcc	r6, r0, ip, ror r5
+30001014:	30005a71 	andcc	r5, r0, r1, ror sl
+30001018:	30006538 	andcc	r6, r0, r8, lsr r5
 
 3000101c <OSFlagQuery>:
 3000101c:	e3500000 	cmp	r0, #0
@@ -1196,8 +1196,8 @@ Disassembly of section .text:
 300010b0:	e5823000 	str	r3, [r2]
 300010b4:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
 300010b8:	e12fff1e 	bx	lr
-300010bc:	300051b4 			; <UNDEFINED> instruction: 0x300051b4
-300010c0:	3000657c 	andcc	r6, r0, ip, ror r5
+300010bc:	30005170 	andcc	r5, r0, r0, ror r1
+300010c0:	30006538 	andcc	r6, r0, r8, lsr r5
 
 300010c4 <OS_FlagUnlink>:
 300010c4:	e5902004 	ldr	r2, [r0, #4]
@@ -1246,8 +1246,8 @@ Disassembly of section .text:
 30001168:	e1a00004 	mov	r0, r4
 3000116c:	e8bd4010 	pop	{r4, lr}
 30001170:	e12fff1e 	bx	lr
-30001174:	30005aa8 	andcc	r5, r0, r8, lsr #21
-30001178:	30005aac 	andcc	r5, r0, ip, lsr #21
+30001174:	30005a64 	andcc	r5, r0, r4, ror #20
+30001178:	30005a68 	andcc	r5, r0, r8, ror #20
 
 3000117c <OSFlagPost>:
 3000117c:	e92d40f8 	push	{r3, r4, r5, r6, r7, lr}
@@ -1435,8 +1435,8 @@ Disassembly of section .text:
 3000144c:	e3a04000 	mov	r4, #0
 30001450:	e5c64000 	strb	r4, [r6]
 30001454:	eaffffc1 	b	30001360 <OSFlagDel+0x48>
-30001458:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-3000145c:	3000657c 	andcc	r6, r0, ip, ror r5
+30001458:	30005a71 	andcc	r5, r0, r1, ror sl
+3000145c:	30006538 	andcc	r6, r0, r8, lsr r5
 
 30001460 <OSFlagPend>:
 30001460:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
@@ -1628,8 +1628,8 @@ Disassembly of section .text:
 30001748:	e3c000c0 	bic	r0, r0, #192	; 0xc0
 3000174c:	e129f000 	msr	CPSR_fc, r0
 30001750:	eaffffaf 	b	30001614 <OSFlagPend+0x1b4>
-30001754:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30001758:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
+30001754:	30005a71 	andcc	r5, r0, r1, ror sl
+30001758:	30005a74 	andcc	r5, r0, r4, ror sl
 
 3000175c <OSTimeDly>:
 3000175c:	e3500000 	cmp	r0, #0
@@ -1659,9 +1659,9 @@ Disassembly of section .text:
 300017bc:	eb0008a2 	bl	30003a4c <OS_Sched>
 300017c0:	e8bd4008 	pop	{r3, lr}
 300017c4:	e12fff1e 	bx	lr
-300017c8:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-300017cc:	30005aac 	andcc	r5, r0, ip, lsr #21
-300017d0:	30005aa8 	andcc	r5, r0, r8, lsr #21
+300017c8:	30005a74 	andcc	r5, r0, r4, ror sl
+300017cc:	30005a68 	andcc	r5, r0, r8, ror #20
+300017d0:	30005a64 	andcc	r5, r0, r4, ror #20
 
 300017d4 <OSTimeDlyHMSM>:
 300017d4:	e181c000 	orr	ip, r1, r0
@@ -1790,9 +1790,9 @@ Disassembly of section .text:
 300019b8:	eb000823 	bl	30003a4c <OS_Sched>
 300019bc:	e3a00000 	mov	r0, #0
 300019c0:	eaffffdd 	b	3000193c <OSTimeDlyResume+0x48>
-300019c4:	30006584 	andcc	r6, r0, r4, lsl #11
-300019c8:	30005aa8 	andcc	r5, r0, r8, lsr #21
-300019cc:	30005aac 	andcc	r5, r0, ip, lsr #21
+300019c4:	30006540 	andcc	r6, r0, r0, asr #10
+300019c8:	30005a64 	andcc	r5, r0, r4, ror #20
+300019cc:	30005a68 	andcc	r5, r0, r8, ror #20
 
 300019d0 <OSTimeGet>:
 300019d0:	e10f0000 	mrs	r0, CPSR
@@ -1804,7 +1804,7 @@ Disassembly of section .text:
 300019e8:	e3c000c0 	bic	r0, r0, #192	; 0xc0
 300019ec:	e129f000 	msr	CPSR_fc, r0
 300019f0:	e12fff1e 	bx	lr
-300019f4:	30005abc 			; <UNDEFINED> instruction: 0x30005abc
+300019f4:	30005a78 	andcc	r5, r0, r8, ror sl
 
 300019f8 <OSTimeSet>:
 300019f8:	e10f0000 	mrs	r0, CPSR
@@ -1816,7 +1816,7 @@ Disassembly of section .text:
 30001a10:	e3c000c0 	bic	r0, r0, #192	; 0xc0
 30001a14:	e129f000 	msr	CPSR_fc, r0
 30001a18:	e12fff1e 	bx	lr
-30001a1c:	30005abc 			; <UNDEFINED> instruction: 0x30005abc
+30001a1c:	30005a78 	andcc	r5, r0, r8, ror sl
 
 30001a20 <OSMutexAccept>:
 30001a20:	e59f30ac 	ldr	r3, [pc, #172]	; 30001ad4 <OSMutexAccept+0xb4>
@@ -1864,8 +1864,8 @@ Disassembly of section .text:
 30001ac8:	e5c10000 	strb	r0, [r1]
 30001acc:	e3a00001 	mov	r0, #1
 30001ad0:	e12fff1e 	bx	lr
-30001ad4:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30001ad8:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
+30001ad4:	30005a71 	andcc	r5, r0, r1, ror sl
+30001ad8:	30005a74 	andcc	r5, r0, r4, ror sl
 
 30001adc <OSMutexCreate>:
 30001adc:	e92d4070 	push	{r4, r5, r6, lr}
@@ -1927,9 +1927,9 @@ Disassembly of section .text:
 30001bbc:	e3a0c004 	mov	ip, #4
 30001bc0:	e5c5c000 	strb	ip, [r5]
 30001bc4:	eaffffee 	b	30001b84 <OSMutexCreate+0xa8>
-30001bc8:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30001bcc:	30006584 	andcc	r6, r0, r4, lsl #11
-30001bd0:	30005ab0 			; <UNDEFINED> instruction: 0x30005ab0
+30001bc8:	30005a71 	andcc	r5, r0, r1, ror sl
+30001bcc:	30006540 	andcc	r6, r0, r0, asr #10
+30001bd0:	30005a6c 	andcc	r5, r0, ip, ror #20
 
 30001bd4 <OSMutexDel>:
 30001bd4:	e92d4070 	push	{r4, r5, r6, lr}
@@ -2021,9 +2021,9 @@ Disassembly of section .text:
 30001d2c:	e3a04000 	mov	r4, #0
 30001d30:	e5c54000 	strb	r4, [r5]
 30001d34:	eaffffb8 	b	30001c1c <OSMutexDel+0x48>
-30001d38:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30001d3c:	30006584 	andcc	r6, r0, r4, lsl #11
-30001d40:	30005ab0 			; <UNDEFINED> instruction: 0x30005ab0
+30001d38:	30005a71 	andcc	r5, r0, r1, ror sl
+30001d3c:	30006540 	andcc	r6, r0, r0, asr #10
+30001d40:	30005a6c 	andcc	r5, r0, ip, ror #20
 
 30001d44 <OSMutexPend>:
 30001d44:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
@@ -2161,12 +2161,12 @@ Disassembly of section .text:
 30001f54:	e3a0c00a 	mov	ip, #10
 30001f58:	e5c1c000 	strb	ip, [r1]
 30001f5c:	eaffff8a 	b	30001d8c <OSMutexPend+0x48>
-30001f60:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30001f64:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-30001f68:	30005aac 	andcc	r5, r0, ip, lsr #21
+30001f60:	30005a71 	andcc	r5, r0, r1, ror sl
+30001f64:	30005a74 	andcc	r5, r0, r4, ror sl
+30001f68:	30005a68 	andcc	r5, r0, r8, ror #20
 30001f6c:	3000505c 	andcc	r5, r0, ip, asr r0
-30001f70:	30006584 	andcc	r6, r0, r4, lsl #11
-30001f74:	30005aa8 	andcc	r5, r0, r8, lsr #21
+30001f70:	30006540 	andcc	r6, r0, r0, asr #10
+30001f74:	30005a64 	andcc	r5, r0, r4, ror #20
 
 30001f78 <OSMutexPost>:
 30001f78:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
@@ -2265,11 +2265,11 @@ Disassembly of section .text:
 300020ec:	eb000656 	bl	30003a4c <OS_Sched>
 300020f0:	e3a00000 	mov	r0, #0
 300020f4:	eaffffad 	b	30001fb0 <OSMutexPost+0x38>
-300020f8:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-300020fc:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-30002100:	30006584 	andcc	r6, r0, r4, lsl #11
-30002104:	30005aac 	andcc	r5, r0, ip, lsr #21
-30002108:	30005aa8 	andcc	r5, r0, r8, lsr #21
+300020f8:	30005a71 	andcc	r5, r0, r1, ror sl
+300020fc:	30005a74 	andcc	r5, r0, r4, ror sl
+30002100:	30006540 	andcc	r6, r0, r0, asr #10
+30002104:	30005a68 	andcc	r5, r0, r8, ror #20
+30002108:	30005a64 	andcc	r5, r0, r4, ror #20
 3000210c:	3000505c 	andcc	r5, r0, ip, asr r0
 
 30002110 <OSMutexQuery>:
@@ -2309,7 +2309,7 @@ Disassembly of section .text:
 30002194:	e129f000 	msr	CPSR_fc, r0
 30002198:	e3a00000 	mov	r0, #0
 3000219c:	e12fff1e 	bx	lr
-300021a0:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
+300021a0:	30005a71 	andcc	r5, r0, r1, ror sl
 
 300021a4 <timer0_init>:
 300021a4:	e3a03451 	mov	r3, #1358954496	; 0x51000000
@@ -2471,11 +2471,11 @@ Disassembly of section .text:
 30002404:	e129f000 	msr	CPSR_fc, r0
 30002408:	e3a00029 	mov	r0, #41	; 0x29
 3000240c:	eaffffae 	b	300022cc <OSTaskChangePrio+0x58>
-30002410:	30006584 	andcc	r6, r0, r4, lsl #11
+30002410:	30006540 	andcc	r6, r0, r0, asr #10
 30002414:	3000505c 	andcc	r5, r0, ip, asr r0
-30002418:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-3000241c:	30005aac 	andcc	r5, r0, ip, lsr #21
-30002420:	30005aa8 	andcc	r5, r0, r8, lsr #21
+30002418:	30005a74 	andcc	r5, r0, r4, ror sl
+3000241c:	30005a68 	andcc	r5, r0, r8, ror #20
+30002420:	30005a64 	andcc	r5, r0, r4, ror #20
 
 30002424 <OSTaskCreate>:
 30002424:	e92d4030 	push	{r4, r5, lr}
@@ -2543,9 +2543,9 @@ Disassembly of section .text:
 3000251c:	e3c000c0 	bic	r0, r0, #192	; 0xc0
 30002520:	e129f000 	msr	CPSR_fc, r0
 30002524:	eaffffcf 	b	30002468 <OSTaskCreate+0x44>
-30002528:	30006584 	andcc	r6, r0, r4, lsl #11
-3000252c:	30005a69 	andcc	r5, r0, r9, ror #20
-30002530:	300051a9 	andcc	r5, r0, r9, lsr #3
+30002528:	30006540 	andcc	r6, r0, r0, asr #10
+3000252c:	30005a25 	andcc	r5, r0, r5, lsr #20
+30002530:	30005165 	andcc	r5, r0, r5, ror #2
 
 30002534 <OSTaskCreateExt>:
 30002534:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
@@ -2631,9 +2631,9 @@ Disassembly of section .text:
 30002674:	e1a02102 	lsl	r2, r2, #2
 30002678:	ebfff720 	bl	30000300 <memset>
 3000267c:	eaffffcd 	b	300025b8 <OSTaskCreateExt+0x84>
-30002680:	30006584 	andcc	r6, r0, r4, lsl #11
-30002684:	30005a69 	andcc	r5, r0, r9, ror #20
-30002688:	300051a9 	andcc	r5, r0, r9, lsr #3
+30002680:	30006540 	andcc	r6, r0, r0, asr #10
+30002684:	30005a25 	andcc	r5, r0, r5, lsr #20
+30002688:	30005165 	andcc	r5, r0, r5, ror #2
 
 3000268c <OSTaskDel>:
 3000268c:	e92d40f8 	push	{r3, r4, r5, r6, r7, lr}
@@ -2744,15 +2744,15 @@ Disassembly of section .text:
 30002830:	e129f000 	msr	CPSR_fc, r0
 30002834:	e3a0003c 	mov	r0, #60	; 0x3c
 30002838:	eafffff8 	b	30002820 <OSTaskDel+0x194>
-3000283c:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30002840:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-30002844:	30006584 	andcc	r6, r0, r4, lsl #11
-30002848:	30005aac 	andcc	r5, r0, ip, lsr #21
-3000284c:	30005aa8 	andcc	r5, r0, r8, lsr #21
-30002850:	300051a8 	andcc	r5, r0, r8, lsr #3
-30002854:	30005a69 	andcc	r5, r0, r9, ror #20
-30002858:	30005a64 	andcc	r5, r0, r4, ror #20
-3000285c:	300051f4 	strdcc	r5, [r0], -r4
+3000283c:	30005a71 	andcc	r5, r0, r1, ror sl
+30002840:	30005a74 	andcc	r5, r0, r4, ror sl
+30002844:	30006540 	andcc	r6, r0, r0, asr #10
+30002848:	30005a68 	andcc	r5, r0, r8, ror #20
+3000284c:	30005a64 	andcc	r5, r0, r4, ror #20
+30002850:	30005164 	andcc	r5, r0, r4, ror #2
+30002854:	30005a25 	andcc	r5, r0, r5, lsr #20
+30002858:	30005a20 	andcc	r5, r0, r0, lsr #20
+3000285c:	300051b0 			; <UNDEFINED> instruction: 0x300051b0
 
 30002860 <OSTaskDelReq>:
 30002860:	e350000c 	cmp	r0, #12
@@ -2790,8 +2790,8 @@ Disassembly of section .text:
 300028e0:	e3c000c0 	bic	r0, r0, #192	; 0xc0
 300028e4:	e129f000 	msr	CPSR_fc, r0
 300028e8:	e12fff1e 	bx	lr
-300028ec:	30006584 	andcc	r6, r0, r4, lsl #11
-300028f0:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
+300028ec:	30006540 	andcc	r6, r0, r0, asr #10
+300028f0:	30005a74 	andcc	r5, r0, r4, ror sl
 
 300028f4 <OSTaskResume>:
 300028f4:	e350000b 	cmp	r0, #11
@@ -2848,9 +2848,9 @@ Disassembly of section .text:
 300029c0:	eb000421 	bl	30003a4c <OS_Sched>
 300029c4:	e3a00000 	mov	r0, #0
 300029c8:	eaffffdb 	b	3000293c <OSTaskResume+0x48>
-300029cc:	30006584 	andcc	r6, r0, r4, lsl #11
-300029d0:	30005aa8 	andcc	r5, r0, r8, lsr #21
-300029d4:	30005aac 	andcc	r5, r0, ip, lsr #21
+300029cc:	30006540 	andcc	r6, r0, r0, asr #10
+300029d0:	30005a64 	andcc	r5, r0, r4, ror #20
+300029d4:	30005a68 	andcc	r5, r0, r8, ror #20
 
 300029d8 <OSTaskStkChk>:
 300029d8:	e240200d 	sub	r2, r0, #13
@@ -2906,8 +2906,8 @@ Disassembly of section .text:
 30002aa0:	e8811004 	stm	r1, {r2, ip}
 30002aa4:	e3a00000 	mov	r0, #0
 30002aa8:	e12fff1e 	bx	lr
-30002aac:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-30002ab0:	30006584 	andcc	r6, r0, r4, lsl #11
+30002aac:	30005a74 	andcc	r5, r0, r4, ror sl
+30002ab0:	30006540 	andcc	r6, r0, r0, asr #10
 
 30002ab4 <OSTaskSuspend>:
 30002ab4:	e350000c 	cmp	r0, #12
@@ -2973,10 +2973,10 @@ Disassembly of section .text:
 30002ba4:	eb0003a8 	bl	30003a4c <OS_Sched>
 30002ba8:	e3a00000 	mov	r0, #0
 30002bac:	eaffffed 	b	30002b68 <OSTaskSuspend+0xb4>
-30002bb0:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-30002bb4:	30006584 	andcc	r6, r0, r4, lsl #11
-30002bb8:	30005aac 	andcc	r5, r0, ip, lsr #21
-30002bbc:	30005aa8 	andcc	r5, r0, r8, lsr #21
+30002bb0:	30005a74 	andcc	r5, r0, r4, ror sl
+30002bb4:	30006540 	andcc	r6, r0, r0, asr #10
+30002bb8:	30005a68 	andcc	r5, r0, r8, ror #20
+30002bbc:	30005a64 	andcc	r5, r0, r4, ror #20
 
 30002bc0 <OSTaskQuery>:
 30002bc0:	e240300d 	sub	r3, r0, #13
@@ -3018,8 +3018,8 @@ Disassembly of section .text:
 30002c50:	e129f000 	msr	CPSR_fc, r0
 30002c54:	e3a00029 	mov	r0, #41	; 0x29
 30002c58:	eafffff8 	b	30002c40 <OSTaskQuery+0x80>
-30002c5c:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-30002c60:	30006584 	andcc	r6, r0, r4, lsl #11
+30002c5c:	30005a74 	andcc	r5, r0, r4, ror sl
+30002c60:	30006540 	andcc	r6, r0, r0, asr #10
 
 30002c64 <irq_init>:
 30002c64:	e3a0344a 	mov	r3, #1241513984	; 0x4a000000
@@ -3067,8 +3067,8 @@ Disassembly of section .text:
 30002cfc:	e5932010 	ldr	r2, [r3, #16]
 30002d00:	e5832010 	str	r2, [r3, #16]
 30002d04:	e12fff1e 	bx	lr
-30002d08:	300051a4 	andcc	r5, r0, r4, lsr #3
-30002d0c:	30005164 	andcc	r5, r0, r4, ror #2
+30002d08:	300065b8 			; <UNDEFINED> instruction: 0x300065b8
+30002d0c:	30006578 	andcc	r6, r0, r8, ror r5
 
 30002d10 <irq_handle>:
 30002d10:	e3a0344a 	mov	r3, #1241513984	; 0x4a000000
@@ -3153,8 +3153,8 @@ Disassembly of section .text:
 30002e34:	e1a00004 	mov	r0, r4
 30002e38:	e8bd4010 	pop	{r4, lr}
 30002e3c:	e12fff1e 	bx	lr
-30002e40:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30002e44:	30005ab0 			; <UNDEFINED> instruction: 0x30005ab0
+30002e40:	30005a71 	andcc	r5, r0, r1, ror sl
+30002e44:	30005a6c 	andcc	r5, r0, ip, ror #20
 
 30002e48 <OSSemDel>:
 30002e48:	e92d4070 	push	{r4, r5, r6, lr}
@@ -3238,8 +3238,8 @@ Disassembly of section .text:
 30002f80:	e3a04000 	mov	r4, #0
 30002f84:	e5c54000 	strb	r4, [r5]
 30002f88:	eaffffc0 	b	30002e90 <OSSemDel+0x48>
-30002f8c:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30002f90:	30005ab0 			; <UNDEFINED> instruction: 0x30005ab0
+30002f8c:	30005a71 	andcc	r5, r0, r1, ror sl
+30002f90:	30005a6c 	andcc	r5, r0, ip, ror #20
 
 30002f94 <OSSemPend>:
 30002f94:	e92d4010 	push	{r4, lr}
@@ -3315,8 +3315,8 @@ Disassembly of section .text:
 300030ac:	e3a0200a 	mov	r2, #10
 300030b0:	e5c12000 	strb	r2, [r1]
 300030b4:	eaffffc8 	b	30002fdc <OSSemPend+0x48>
-300030b8:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-300030bc:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
+300030b8:	30005a71 	andcc	r5, r0, r1, ror sl
+300030bc:	30005a74 	andcc	r5, r0, r4, ror sl
 
 300030c0 <OSSemPost>:
 300030c0:	e3500000 	cmp	r0, #0
@@ -3436,11 +3436,11 @@ Disassembly of section .text:
 30003278:	e5c74000 	strb	r4, [r7]
 3000327c:	e1a042ae 	lsr	r4, lr, #5
 30003280:	eaffffeb 	b	30003234 <OS_TaskStat+0x6c>
-30003284:	30006580 	andcc	r6, r0, r0, lsl #11
-30003288:	30005a60 	andcc	r5, r0, r0, ror #20
-3000328c:	300051ac 	andcc	r5, r0, ip, lsr #3
-30003290:	300065b8 			; <UNDEFINED> instruction: 0x300065b8
-30003294:	30005a68 	andcc	r5, r0, r8, ror #20
+30003284:	3000653c 	andcc	r6, r0, ip, lsr r5
+30003288:	30005a1c 	andcc	r5, r0, ip, lsl sl
+3000328c:	30005168 	andcc	r5, r0, r8, ror #2
+30003290:	30006574 	andcc	r6, r0, r4, ror r5
+30003294:	30005a24 	andcc	r5, r0, r4, lsr #20
 30003298:	51eb851f 	mvnpl	r8, pc, lsl r5
 
 3000329c <OS_TaskIdle>:
@@ -3457,7 +3457,7 @@ Disassembly of section .text:
 300032c4:	e129f000 	msr	CPSR_fc, r0
 300032c8:	eb000298 	bl	30003d30 <OSTaskIdleHook>
 300032cc:	eafffff4 	b	300032a4 <OS_TaskIdle+0x8>
-300032d0:	300051ac 	andcc	r5, r0, ip, lsr #3
+300032d0:	30005168 	andcc	r5, r0, r8, ror #2
 
 300032d4 <OSInit>:
 300032d4:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
@@ -3584,32 +3584,32 @@ Disassembly of section .text:
 300034b8:	e28dd018 	add	sp, sp, #24
 300034bc:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
 300034c0:	e12fff1e 	bx	lr
-300034c4:	30005abc 			; <UNDEFINED> instruction: 0x30005abc
-300034c8:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-300034cc:	300051a8 	andcc	r5, r0, r8, lsr #3
-300034d0:	30005a69 	andcc	r5, r0, r9, ror #20
-300034d4:	300051a9 	andcc	r5, r0, r9, lsr #3
-300034d8:	30005a5c 	andcc	r5, r0, ip, asr sl
-300034dc:	300051ac 	andcc	r5, r0, ip, lsr #3
-300034e0:	30005aac 	andcc	r5, r0, ip, lsr #21
-300034e4:	300065b8 			; <UNDEFINED> instruction: 0x300065b8
-300034e8:	30005a60 	andcc	r5, r0, r0, ror #20
-300034ec:	30006580 	andcc	r6, r0, r0, lsl #11
-300034f0:	30005aa8 	andcc	r5, r0, r8, lsr #21
-300034f4:	300062d8 	ldrdcc	r6, [r0], -r8
-300034f8:	30006584 	andcc	r6, r0, r4, lsl #11
-300034fc:	300051f0 	strdcc	r5, [r0], -r0
-30003500:	300051b0 			; <UNDEFINED> instruction: 0x300051b0
-30003504:	30005aa0 	andcc	r5, r0, r0, lsr #21
-30003508:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-3000350c:	300051f4 	strdcc	r5, [r0], -r4
-30003510:	300062c0 	andcc	r6, r0, r0, asr #5
-30003514:	30005a64 	andcc	r5, r0, r4, ror #20
-30003518:	30005ab0 			; <UNDEFINED> instruction: 0x30005ab0
-3000351c:	300062bc 			; <UNDEFINED> instruction: 0x300062bc
+300034c4:	30005a78 	andcc	r5, r0, r8, ror sl
+300034c8:	30005a71 	andcc	r5, r0, r1, ror sl
+300034cc:	30005164 	andcc	r5, r0, r4, ror #2
+300034d0:	30005a25 	andcc	r5, r0, r5, lsr #20
+300034d4:	30005165 	andcc	r5, r0, r5, ror #2
+300034d8:	30005a18 	andcc	r5, r0, r8, lsl sl
+300034dc:	30005168 	andcc	r5, r0, r8, ror #2
+300034e0:	30005a68 	andcc	r5, r0, r8, ror #20
+300034e4:	30006574 	andcc	r6, r0, r4, ror r5
+300034e8:	30005a1c 	andcc	r5, r0, ip, lsl sl
+300034ec:	3000653c 	andcc	r6, r0, ip, lsr r5
+300034f0:	30005a64 	andcc	r5, r0, r4, ror #20
+300034f4:	30006294 	mulcc	r0, r4, r2
+300034f8:	30006540 	andcc	r6, r0, r0, asr #10
+300034fc:	300051ac 	andcc	r5, r0, ip, lsr #3
+30003500:	3000516c 	andcc	r5, r0, ip, ror #2
+30003504:	30005a5c 	andcc	r5, r0, ip, asr sl
+30003508:	30005a74 	andcc	r5, r0, r4, ror sl
+3000350c:	300051b0 			; <UNDEFINED> instruction: 0x300051b0
+30003510:	3000627c 	andcc	r6, r0, ip, ror r2
+30003514:	30005a20 	andcc	r5, r0, r0, lsr #20
+30003518:	30005a6c 	andcc	r5, r0, ip, ror #20
+3000351c:	30006278 	andcc	r6, r0, r8, ror r2
 30003520:	0000ffff 	strdeq	pc, [r0], -pc	; <UNPREDICTABLE>
 30003524:	3000329c 	mulcc	r0, ip, r2
-30003528:	30005a58 	andcc	r5, r0, r8, asr sl
+30003528:	30005a14 	andcc	r5, r0, r4, lsl sl
 3000352c:	0000fffe 	strdeq	pc, [r0], -lr
 30003530:	300031c8 	andcc	r3, r0, r8, asr #3
 
@@ -3624,8 +3624,8 @@ Disassembly of section .text:
 30003550:	12822001 	addne	r2, r2, #1
 30003554:	15c12000 	strbne	r2, [r1]
 30003558:	e12fff1e 	bx	lr
-3000355c:	300051a9 	andcc	r5, r0, r9, lsr #3
-30003560:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
+3000355c:	30005165 	andcc	r5, r0, r5, ror #2
+30003560:	30005a71 	andcc	r5, r0, r1, ror sl
 
 30003564 <OSIntExit>:
 30003564:	e92d4008 	push	{r3, lr}
@@ -3682,18 +3682,18 @@ Disassembly of section .text:
 30003630:	e583e000 	str	lr, [r3]
 30003634:	eb000607 	bl	30004e58 <OSIntCtxSw>
 30003638:	eaffffdc 	b	300035b0 <OSIntExit+0x4c>
-3000363c:	300051a9 	andcc	r5, r0, r9, lsr #3
-30003640:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30003644:	300051a8 	andcc	r5, r0, r8, lsr #3
-30003648:	30005aa8 	andcc	r5, r0, r8, lsr #21
+3000363c:	30005165 	andcc	r5, r0, r5, ror #2
+30003640:	30005a71 	andcc	r5, r0, r1, ror sl
+30003644:	30005164 	andcc	r5, r0, r4, ror #2
+30003648:	30005a64 	andcc	r5, r0, r4, ror #20
 3000364c:	30004f5c 	andcc	r4, r0, ip, asr pc
-30003650:	30005aac 	andcc	r5, r0, ip, lsr #21
-30003654:	300051f0 	strdcc	r5, [r0], -r0
-30003658:	30005ab4 			; <UNDEFINED> instruction: 0x30005ab4
-3000365c:	300051b0 			; <UNDEFINED> instruction: 0x300051b0
-30003660:	30005a5c 	andcc	r5, r0, ip, asr sl
-30003664:	30006584 	andcc	r6, r0, r4, lsl #11
-30003668:	30005aa0 	andcc	r5, r0, r0, lsr #21
+30003650:	30005a68 	andcc	r5, r0, r8, ror #20
+30003654:	300051ac 	andcc	r5, r0, ip, lsr #3
+30003658:	30005a70 	andcc	r5, r0, r0, ror sl
+3000365c:	3000516c 	andcc	r5, r0, ip, ror #2
+30003660:	30005a18 	andcc	r5, r0, r8, lsl sl
+30003664:	30006540 	andcc	r6, r0, r0, asr #10
+30003668:	30005a5c 	andcc	r5, r0, ip, asr sl
 
 3000366c <OSSchedLock>:
 3000366c:	e59f0038 	ldr	r0, [pc, #56]	; 300036ac <OSSchedLock+0x40>
@@ -3712,8 +3712,8 @@ Disassembly of section .text:
 300036a0:	e3c000c0 	bic	r0, r0, #192	; 0xc0
 300036a4:	e129f000 	msr	CPSR_fc, r0
 300036a8:	e12fff1e 	bx	lr
-300036ac:	300051a9 	andcc	r5, r0, r9, lsr #3
-300036b0:	300051a8 	andcc	r5, r0, r8, lsr #3
+300036ac:	30005165 	andcc	r5, r0, r5, ror #2
+300036b0:	30005164 	andcc	r5, r0, r4, ror #2
 
 300036b4 <OSStart>:
 300036b4:	e92d4008 	push	{r3, lr}
@@ -3743,15 +3743,15 @@ Disassembly of section .text:
 30003714:	eb0005c5 	bl	30004e30 <OSStartHighRdy>
 30003718:	e8bd4008 	pop	{r3, lr}
 3000371c:	e12fff1e 	bx	lr
-30003720:	300051a9 	andcc	r5, r0, r9, lsr #3
-30003724:	30005aa8 	andcc	r5, r0, r8, lsr #21
+30003720:	30005165 	andcc	r5, r0, r5, ror #2
+30003724:	30005a64 	andcc	r5, r0, r4, ror #20
 30003728:	30004f5c 	andcc	r4, r0, ip, asr pc
-3000372c:	30005aac 	andcc	r5, r0, ip, lsr #21
-30003730:	30006584 	andcc	r6, r0, r4, lsl #11
-30003734:	300051b0 			; <UNDEFINED> instruction: 0x300051b0
-30003738:	300051f0 	strdcc	r5, [r0], -r0
-3000373c:	30005aa0 	andcc	r5, r0, r0, lsr #21
-30003740:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
+3000372c:	30005a68 	andcc	r5, r0, r8, ror #20
+30003730:	30006540 	andcc	r6, r0, r0, asr #10
+30003734:	3000516c 	andcc	r5, r0, ip, ror #2
+30003738:	300051ac 	andcc	r5, r0, ip, lsr #3
+3000373c:	30005a5c 	andcc	r5, r0, ip, asr sl
+30003740:	30005a74 	andcc	r5, r0, r4, ror sl
 
 30003744 <OSStatInit>:
 30003744:	e92d4008 	push	{r3, lr}
@@ -3783,9 +3783,9 @@ Disassembly of section .text:
 300037ac:	e129f000 	msr	CPSR_fc, r0
 300037b0:	e8bd4008 	pop	{r3, lr}
 300037b4:	e12fff1e 	bx	lr
-300037b8:	300051ac 	andcc	r5, r0, ip, lsr #3
-300037bc:	30005a60 	andcc	r5, r0, r0, ror #20
-300037c0:	30006580 	andcc	r6, r0, r0, lsl #11
+300037b8:	30005168 	andcc	r5, r0, r8, ror #2
+300037bc:	30005a1c 	andcc	r5, r0, ip, lsl sl
+300037c0:	3000653c 	andcc	r6, r0, ip, lsr r5
 
 300037c4 <OSTimeTick>:
 300037c4:	e92d4070 	push	{r4, r5, r6, lr}
@@ -3846,11 +3846,11 @@ Disassembly of section .text:
 300038a0:	1affffe1 	bne	3000382c <OSTimeTick+0x68>
 300038a4:	e5c40000 	strb	r0, [r4]
 300038a8:	eaffffd5 	b	30003804 <OSTimeTick+0x40>
-300038ac:	30005abc 			; <UNDEFINED> instruction: 0x30005abc
-300038b0:	300051a9 	andcc	r5, r0, r9, lsr #3
-300038b4:	300051f4 	strdcc	r5, [r0], -r4
-300038b8:	30005aa8 	andcc	r5, r0, r8, lsr #21
-300038bc:	30005aac 	andcc	r5, r0, ip, lsr #21
+300038ac:	30005a78 	andcc	r5, r0, r8, ror sl
+300038b0:	30005165 	andcc	r5, r0, r5, ror #2
+300038b4:	300051b0 			; <UNDEFINED> instruction: 0x300051b0
+300038b8:	30005a64 	andcc	r5, r0, r4, ror #20
+300038bc:	30005a68 	andcc	r5, r0, r8, ror #20
 
 300038c0 <OSVersion>:
 300038c0:	e3a000fc 	mov	r0, #252	; 0xfc
@@ -3901,9 +3901,9 @@ Disassembly of section .text:
 30003964:	e8bd05f0 	pop	{r4, r5, r6, r7, r8, sl}
 30003968:	e12fff1e 	bx	lr
 3000396c:	30004f5c 	andcc	r4, r0, ip, asr pc
-30003970:	30006584 	andcc	r6, r0, r4, lsl #11
-30003974:	30005aa8 	andcc	r5, r0, r8, lsr #21
-30003978:	30005aac 	andcc	r5, r0, ip, lsr #21
+30003970:	30006540 	andcc	r6, r0, r0, asr #10
+30003974:	30005a64 	andcc	r5, r0, r4, ror #20
+30003978:	30005a68 	andcc	r5, r0, r8, ror #20
 
 3000397c <OS_EventTaskWait>:
 3000397c:	e92d0030 	push	{r4, r5}
@@ -3932,9 +3932,9 @@ Disassembly of section .text:
 300039d8:	e5c03001 	strb	r3, [r0, #1]
 300039dc:	e8bd0030 	pop	{r4, r5}
 300039e0:	e12fff1e 	bx	lr
-300039e4:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-300039e8:	30005aac 	andcc	r5, r0, ip, lsr #21
-300039ec:	30005aa8 	andcc	r5, r0, r8, lsr #21
+300039e4:	30005a74 	andcc	r5, r0, r4, ror sl
+300039e8:	30005a68 	andcc	r5, r0, r8, ror #20
+300039ec:	30005a64 	andcc	r5, r0, r4, ror #20
 
 300039f0 <OS_EventTO>:
 300039f0:	e59f303c 	ldr	r3, [pc, #60]	; 30003a34 <OS_EventTO+0x44>
@@ -3954,7 +3954,7 @@ Disassembly of section .text:
 30003a28:	e5c3202c 	strb	r2, [r3, #44]	; 0x2c
 30003a2c:	e583201c 	str	r2, [r3, #28]
 30003a30:	e12fff1e 	bx	lr
-30003a34:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
+30003a34:	30005a74 	andcc	r5, r0, r4, ror sl
 
 30003a38 <OS_EventWaitListInit>:
 30003a38:	e3a03000 	mov	r3, #0
@@ -4003,16 +4003,16 @@ Disassembly of section .text:
 30003adc:	e3c000c0 	bic	r0, r0, #192	; 0xc0
 30003ae0:	e129f000 	msr	CPSR_fc, r0
 30003ae4:	e12fff1e 	bx	lr
-30003ae8:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30003aec:	300051a8 	andcc	r5, r0, r8, lsr #3
-30003af0:	30005aa8 	andcc	r5, r0, r8, lsr #21
+30003ae8:	30005a71 	andcc	r5, r0, r1, ror sl
+30003aec:	30005164 	andcc	r5, r0, r4, ror #2
+30003af0:	30005a64 	andcc	r5, r0, r4, ror #20
 30003af4:	30004f5c 	andcc	r4, r0, ip, asr pc
-30003af8:	30005aac 	andcc	r5, r0, ip, lsr #21
-30003afc:	300051f0 	strdcc	r5, [r0], -r0
-30003b00:	300051b0 			; <UNDEFINED> instruction: 0x300051b0
-30003b04:	30005a5c 	andcc	r5, r0, ip, asr sl
-30003b08:	30006584 	andcc	r6, r0, r4, lsl #11
-30003b0c:	30005aa0 	andcc	r5, r0, r0, lsr #21
+30003af8:	30005a68 	andcc	r5, r0, r8, ror #20
+30003afc:	300051ac 	andcc	r5, r0, ip, lsr #3
+30003b00:	3000516c 	andcc	r5, r0, ip, ror #2
+30003b04:	30005a18 	andcc	r5, r0, r8, lsl sl
+30003b08:	30006540 	andcc	r6, r0, r0, asr #10
+30003b0c:	30005a5c 	andcc	r5, r0, ip, asr sl
 
 30003b10 <OSSchedUnlock>:
 30003b10:	e59f0078 	ldr	r0, [pc, #120]	; 30003b90 <OSSchedUnlock+0x80>
@@ -4047,9 +4047,9 @@ Disassembly of section .text:
 30003b84:	e3c000c0 	bic	r0, r0, #192	; 0xc0
 30003b88:	e129f000 	msr	CPSR_fc, r0
 30003b8c:	eaffffae 	b	30003a4c <OS_Sched>
-30003b90:	300051a9 	andcc	r5, r0, r9, lsr #3
-30003b94:	300051a8 	andcc	r5, r0, r8, lsr #3
-30003b98:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
+30003b90:	30005165 	andcc	r5, r0, r5, ror #2
+30003b94:	30005164 	andcc	r5, r0, r4, ror #2
+30003b98:	30005a71 	andcc	r5, r0, r1, ror sl
 
 30003b9c <OS_TCBInit>:
 30003b9c:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
@@ -4133,12 +4133,12 @@ Disassembly of section .text:
 30003cd4:	e129f000 	msr	CPSR_fc, r0
 30003cd8:	e3a00046 	mov	r0, #70	; 0x46
 30003cdc:	eafffff8 	b	30003cc4 <OS_TCBInit+0x128>
-30003ce0:	30005a64 	andcc	r5, r0, r4, ror #20
+30003ce0:	30005a20 	andcc	r5, r0, r0, lsr #20
 30003ce4:	30004f5c 	andcc	r4, r0, ip, asr pc
-30003ce8:	300051f4 	strdcc	r5, [r0], -r4
-30003cec:	30006584 	andcc	r6, r0, r4, lsl #11
-30003cf0:	30005aa8 	andcc	r5, r0, r8, lsr #21
-30003cf4:	30005aac 	andcc	r5, r0, ip, lsr #21
+30003ce8:	300051b0 			; <UNDEFINED> instruction: 0x300051b0
+30003cec:	30006540 	andcc	r6, r0, r0, asr #10
+30003cf0:	30005a64 	andcc	r5, r0, r4, ror #20
+30003cf4:	30005a68 	andcc	r5, r0, r8, ror #20
 
 30003cf8 <main>:
 30003cf8:	e92d4008 	push	{r3, lr}
@@ -4318,9 +4318,9 @@ Disassembly of section .text:
 30003f50:	e129f000 	msr	CPSR_fc, r0
 30003f54:	e3a04000 	mov	r4, #0
 30003f58:	eafffff4 	b	30003f30 <OSQCreate+0xb8>
-30003f5c:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30003f60:	30005ab0 			; <UNDEFINED> instruction: 0x30005ab0
-30003f64:	30005aa4 	andcc	r5, r0, r4, lsr #21
+30003f5c:	30005a71 	andcc	r5, r0, r1, ror sl
+30003f60:	30005a6c 	andcc	r5, r0, ip, ror #20
+30003f64:	30005a60 	andcc	r5, r0, r0, ror #20
 
 30003f68 <OSQDel>:
 30003f68:	e92d4070 	push	{r4, r5, r6, lr}
@@ -4415,9 +4415,9 @@ Disassembly of section .text:
 300040cc:	e3a04000 	mov	r4, #0
 300040d0:	e5c54000 	strb	r4, [r5]
 300040d4:	eaffffb6 	b	30003fb4 <OSQDel+0x4c>
-300040d8:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-300040dc:	30005aa4 	andcc	r5, r0, r4, lsr #21
-300040e0:	30005ab0 			; <UNDEFINED> instruction: 0x30005ab0
+300040d8:	30005a71 	andcc	r5, r0, r1, ror sl
+300040dc:	30005a60 	andcc	r5, r0, r0, ror #20
+300040e0:	30005a6c 	andcc	r5, r0, ip, ror #20
 
 300040e4 <OSQFlush>:
 300040e4:	e3500000 	cmp	r0, #0
@@ -4532,8 +4532,8 @@ Disassembly of section .text:
 30004290:	e5c23000 	strb	r3, [r2]
 30004294:	e59d3004 	ldr	r3, [sp, #4]
 30004298:	eaffffd0 	b	300041e0 <OSQPend+0xa4>
-3000429c:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-300042a0:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
+3000429c:	30005a71 	andcc	r5, r0, r1, ror sl
+300042a0:	30005a74 	andcc	r5, r0, r4, ror sl
 
 300042a4 <OSQPost>:
 300042a4:	e3500000 	cmp	r0, #0
@@ -4759,8 +4759,8 @@ Disassembly of section .text:
 300045f4:	e5830018 	str	r0, [r3, #24]
 300045f8:	e5823000 	str	r3, [r2]
 300045fc:	e12fff1e 	bx	lr
-30004600:	30005a70 	andcc	r5, r0, r0, ror sl
-30004604:	30005aa4 	andcc	r5, r0, r4, lsr #21
+30004600:	30005a2c 	andcc	r5, r0, ip, lsr #20
+30004604:	30005a60 	andcc	r5, r0, r0, ror #20
 
 30004608 <OSMboxAccept>:
 30004608:	e2503000 	subs	r3, r0, #0
@@ -4812,8 +4812,8 @@ Disassembly of section .text:
 300046b8:	e1a00004 	mov	r0, r4
 300046bc:	e8bd4010 	pop	{r4, lr}
 300046c0:	e12fff1e 	bx	lr
-300046c4:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-300046c8:	30005ab0 			; <UNDEFINED> instruction: 0x30005ab0
+300046c4:	30005a71 	andcc	r5, r0, r1, ror sl
+300046c8:	30005a6c 	andcc	r5, r0, ip, ror #20
 
 300046cc <OSMboxDel>:
 300046cc:	e92d4070 	push	{r4, r5, r6, lr}
@@ -4897,8 +4897,8 @@ Disassembly of section .text:
 30004804:	e3a04000 	mov	r4, #0
 30004808:	e5c54000 	strb	r4, [r5]
 3000480c:	eaffffc0 	b	30004714 <OSMboxDel+0x48>
-30004810:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30004814:	30005ab0 			; <UNDEFINED> instruction: 0x30005ab0
+30004810:	30005a71 	andcc	r5, r0, r1, ror sl
+30004814:	30005a6c 	andcc	r5, r0, ip, ror #20
 
 30004818 <OSMboxPend>:
 30004818:	e92d4010 	push	{r4, lr}
@@ -4980,8 +4980,8 @@ Disassembly of section .text:
 30004948:	e5c23000 	strb	r3, [r2]
 3000494c:	e59d3004 	ldr	r3, [sp, #4]
 30004950:	eaffffd0 	b	30004898 <OSMboxPend+0x80>
-30004954:	30005ab5 			; <UNDEFINED> instruction: 0x30005ab5
-30004958:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
+30004954:	30005a71 	andcc	r5, r0, r1, ror sl
+30004958:	30005a74 	andcc	r5, r0, r4, ror sl
 
 3000495c <OSMboxPost>:
 3000495c:	e3500000 	cmp	r0, #0
@@ -5176,7 +5176,7 @@ Disassembly of section .text:
 30004c38:	e5c34000 	strb	r4, [r3]
 30004c3c:	e8bd05f0 	pop	{r4, r5, r6, r7, r8, sl}
 30004c40:	e12fff1e 	bx	lr
-30004c44:	30005a6c 	andcc	r5, r0, ip, ror #20
+30004c44:	30005a28 	andcc	r5, r0, r8, lsr #20
 
 30004c48 <OSMemGet>:
 30004c48:	e2503000 	subs	r3, r0, #0
@@ -5305,8 +5305,8 @@ Disassembly of section .text:
 30004e1c:	e5823000 	str	r3, [r2]
 30004e20:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
 30004e24:	e12fff1e 	bx	lr
-30004e28:	300051f8 	strdcc	r5, [r0], -r8
-30004e2c:	30005a6c 	andcc	r5, r0, ip, ror #20
+30004e28:	300051b4 			; <UNDEFINED> instruction: 0x300051b4
+30004e2c:	30005a28 	andcc	r5, r0, r8, lsr #20
 
 30004e30 <OSStartHighRdy>:
 30004e30:	e59f4104 	ldr	r4, [pc, #260]	; 30004f3c <OS_TASK_SW+0x5c>
@@ -5380,10 +5380,10 @@ Disassembly of section .text:
 30004f30:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
 30004f34:	e129f004 	msr	CPSR_fc, r4
 30004f38:	e8bddfff 	pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr, pc}
-30004f3c:	30005ab8 			; <UNDEFINED> instruction: 0x30005ab8
-30004f40:	30005aa0 	andcc	r5, r0, r0, lsr #21
-30004f44:	300051f0 	strdcc	r5, [r0], -r0
-30004f48:	300051b0 			; <UNDEFINED> instruction: 0x300051b0
+30004f3c:	30005a74 	andcc	r5, r0, r4, ror sl
+30004f40:	30005a5c 	andcc	r5, r0, ip, asr sl
+30004f44:	300051ac 	andcc	r5, r0, ip, lsr #3
+30004f48:	3000516c 	andcc	r5, r0, ip, ror #2
 
 Disassembly of section .rodata:
 
@@ -5481,7 +5481,7 @@ Disassembly of section .rodata.str1.4:
 30005094:	676e6974 			; <UNDEFINED> instruction: 0x676e6974
 30005098:	76616820 	strbtvc	r6, [r1], -r0, lsr #16
 3000509c:	6f642065 	svcvs	0x00642065
-300050a0:	0a21656e 	beq	3085e660 <OSTickDOSCtr+0x8580a4>
+300050a0:	0a21656e 	beq	3085e660 <OSTickDOSCtr+0x8580a6>
 300050a4:	0000000d 	andeq	r0, r0, sp
 300050a8:	69746e69 	ldmdbvs	r4!, {r0, r3, r5, r6, r9, sl, fp, sp, lr}^
 300050ac:	69206c61 	stmdbvs	r0!, {r0, r5, r6, sl, fp, sp, lr}
@@ -5516,7 +5516,7 @@ Disassembly of section .rodata.str1.4:
 30005120:	20706574 	rsbscs	r6, r0, r4, ror r5
 30005124:	61206e69 	teqvs	r0, r9, ror #28
 30005128:	63657320 	cmnvs	r5, #32, 6	; 0x80000000
-3000512c:	0a646e6f 	beq	31920af0 <OSTickDOSCtr+0x191a534>
+3000512c:	0a646e6f 	beq	31920af0 <OSTickDOSCtr+0x191a536>
 30005130:	0000000d 	andeq	r0, r0, sp
 30005134:	20776f6e 	rsbscs	r6, r7, lr, ror #30
 30005138:	69206f67 	stmdbvs	r0!, {r0, r1, r2, r5, r6, r8, r9, sl, fp, sp, lr}
@@ -5533,109 +5533,109 @@ Disassembly of section .rodata.str1.4:
 
 Disassembly of section .bss:
 
-30005164 <uart_buffer>:
+30005164 <OSLockNesting>:
 	...
 
-300051a4 <buf_counter>:
-300051a4:	00000000 	andeq	r0, r0, r0
+30005165 <OSRunning>:
+30005165:	00000000 	andeq	r0, r0, r0
 
-300051a8 <OSLockNesting>:
+30005168 <OSIdleCtr>:
+30005168:	00000000 	andeq	r0, r0, r0
+
+3000516c <OSPrioHighRdy>:
+3000516c:	00000000 	andeq	r0, r0, r0
+
+30005170 <OSFlagTbl>:
 	...
 
-300051a9 <OSRunning>:
-300051a9:	00000000 	andeq	r0, r0, r0
-
-300051ac <OSIdleCtr>:
+300051ac <OSPrioCur>:
 300051ac:	00000000 	andeq	r0, r0, r0
 
-300051b0 <OSPrioHighRdy>:
+300051b0 <OSTCBList>:
 300051b0:	00000000 	andeq	r0, r0, r0
 
-300051b4 <OSFlagTbl>:
+300051b4 <OSMemTbl>:
 	...
 
-300051f0 <OSPrioCur>:
-300051f0:	00000000 	andeq	r0, r0, r0
-
-300051f4 <OSTCBList>:
-300051f4:	00000000 	andeq	r0, r0, r0
-
-300051f8 <OSMemTbl>:
+30005218 <OSTaskStatStk>:
 	...
 
-3000525c <OSTaskStatStk>:
+30005a18 <OSCtxSwCtr>:
+30005a18:	00000000 	andeq	r0, r0, r0
+
+30005a1c <OSIdleCtrMax>:
+30005a1c:	00000000 	andeq	r0, r0, r0
+
+30005a20 <OSTCBFreeList>:
+30005a20:	00000000 	andeq	r0, r0, r0
+
+30005a24 <OSCPUUsage>:
 	...
 
-30005a5c <OSCtxSwCtr>:
+30005a25 <OSTaskCtr>:
+30005a25:	00000000 	andeq	r0, r0, r0
+
+30005a28 <OSMemFreeList>:
+30005a28:	00000000 	andeq	r0, r0, r0
+
+30005a2c <OSQTbl>:
+	...
+
+30005a5c <OSTCBHighRdy>:
 30005a5c:	00000000 	andeq	r0, r0, r0
 
-30005a60 <OSIdleCtrMax>:
+30005a60 <OSQFreeList>:
 30005a60:	00000000 	andeq	r0, r0, r0
 
-30005a64 <OSTCBFreeList>:
+30005a64 <OSRdyGrp>:
 30005a64:	00000000 	andeq	r0, r0, r0
 
-30005a68 <OSCPUUsage>:
-	...
+30005a68 <OSRdyTbl>:
+30005a68:	00000000 	andeq	r0, r0, r0
 
-30005a69 <OSTaskCtr>:
-30005a69:	00000000 	andeq	r0, r0, r0
-
-30005a6c <OSMemFreeList>:
+30005a6c <OSEventFreeList>:
 30005a6c:	00000000 	andeq	r0, r0, r0
 
-30005a70 <OSQTbl>:
+30005a70 <OSIntExitY>:
 	...
 
-30005aa0 <OSTCBHighRdy>:
-30005aa0:	00000000 	andeq	r0, r0, r0
+30005a71 <OSIntNesting>:
+30005a71:	00000000 	andeq	r0, r0, r0
 
-30005aa4 <OSQFreeList>:
-30005aa4:	00000000 	andeq	r0, r0, r0
+30005a74 <OSTCBCur>:
+30005a74:	00000000 	andeq	r0, r0, r0
 
-30005aa8 <OSRdyGrp>:
-30005aa8:	00000000 	andeq	r0, r0, r0
+30005a78 <OSTime>:
+30005a78:	00000000 	andeq	r0, r0, r0
 
-30005aac <OSRdyTbl>:
-30005aac:	00000000 	andeq	r0, r0, r0
-
-30005ab0 <OSEventFreeList>:
-30005ab0:	00000000 	andeq	r0, r0, r0
-
-30005ab4 <OSIntExitY>:
+30005a7c <OSTaskIdleStk>:
 	...
 
-30005ab5 <OSIntNesting>:
-30005ab5:	00000000 	andeq	r0, r0, r0
-
-30005ab8 <OSTCBCur>:
-30005ab8:	00000000 	andeq	r0, r0, r0
-
-30005abc <OSTime>:
-30005abc:	00000000 	andeq	r0, r0, r0
-
-30005ac0 <OSTaskIdleStk>:
+3000627c <OSEventTbl>:
 	...
 
-300062c0 <OSEventTbl>:
+30006294 <OSTCBTbl>:
 	...
 
-300062d8 <OSTCBTbl>:
+30006538 <OSFlagFreeList>:
+30006538:	00000000 	andeq	r0, r0, r0
+
+3000653c <OSStatRdy>:
+3000653c:	00000000 	andeq	r0, r0, r0
+
+30006540 <OSTCBPrioTbl>:
 	...
 
-3000657c <OSFlagFreeList>:
-3000657c:	00000000 	andeq	r0, r0, r0
+30006574 <OSIdleCtrRun>:
+30006574:	00000000 	andeq	r0, r0, r0
 
-30006580 <OSStatRdy>:
-30006580:	00000000 	andeq	r0, r0, r0
-
-30006584 <OSTCBPrioTbl>:
+30006578 <uart_buffer>:
 	...
 
-300065b8 <OSIdleCtrRun>:
-300065b8:	00000000 	andeq	r0, r0, r0
+300065b8 <buf_counter>:
+	...
 
-300065bc <OSTickDOSCtr>:
+300065ba <OSTickDOSCtr>:
 	...
 
 Disassembly of section .ARM.attributes:
