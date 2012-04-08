@@ -818,6 +818,8 @@ void          OSIntCtxSw(void);
 
 void          OSStartHighRdy(void);
 
+void          _OS_TASK_SW(void);
+
 void          OSTaskCreateHook(OS_TCB *ptcb);
 void          OSTaskDelHook(OS_TCB *ptcb);
 

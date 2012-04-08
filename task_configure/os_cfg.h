@@ -38,7 +38,7 @@
 
 #define OS_TASK_IDLE_STK_SIZE   512    /* Idle task stack size (# of OS_STK wide entries)              */
 
-#define OS_TASK_STAT_EN           1    /* Enable (1) or Disable(0) the statistics task                 */
+#define OS_TASK_STAT_EN           0    /* Enable (1) or Disable(0) the statistics task                 */
 #define OS_TASK_STAT_STK_SIZE   512    /* Statistics task stack size (# of OS_STK wide entries)        */
 
 #define OS_ARG_CHK_EN             1    /* Enable (1) or Disable (0) argument checking                  */

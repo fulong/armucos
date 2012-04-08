@@ -41,7 +41,7 @@ typedef signed   int  INT32S;                   /* Signed   32 bit quantity     
 typedef float          FP32;                     /* Single precision floating point                    */
 typedef double         FP64;                     /* Double precision floating point                    */
 
-typedef unsigned int   OS_STK;                   /* Each stack entry is 16-bit wide                    */
+typedef unsigned int   OS_STK;                   /* Each stack entry is 32-bit wide                    */
 typedef unsigned short OS_CPU_SR;                /* Define size of CPU status register (PSW = 16 bits) */
 
 #define BYTE           INT8S                     /* Define data types for backward compatibility ...   */
@@ -77,15 +77,19 @@ typedef unsigned short OS_CPU_SR;                /* Define size of CPU status re
 #endif
 
 #if      OS_CRITICAL_METHOD == 2
-#define  OS_ENTER_CRITICAL()  __asm__ __volatile__ ("mrs r0,cpsr\n"\
+#define  OS_ENTER_CRITICAL()  __asm__ __volatile__ ("stmfd sp!,{r0}\n"\
+													"mrs r0,cpsr\n"\
 													"orr r0,r0,#0xc0\n"\
 													"msr cpsr,r0\n"\
+													"ldmia sp!,{r0}\n"\
 													:\
 													:\
 													:)            /* Disable interrupts                        */
-#define  OS_EXIT_CRITICAL()   __asm__ __volatile__ ("mrs r0,cpsr\n"\
+#define  OS_EXIT_CRITICAL()   __asm__ __volatile__ ("stmfd sp!,{r0}\n"\
+													"mrs r0,cpsr\n"\
 													"bic r0,r0,#0xc0\n"\
 													"msr cpsr,r0\n"\
+													"ldmia sp!,{r0}\n"\
 													:\
 													:\
 													:)                          /* Enable  interrupts                        */

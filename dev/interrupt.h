@@ -12,9 +12,10 @@
 #include "../s3c2440/s3c2440.h"
 #include "../dev/uart.h"
 
-extern void irq_handle(void);
+//extern void irq_handle(void);
 extern void timer0_irq(void);
 extern void uart0_irq(void);
 extern void irq_init(void);
+//extern void software_handle(void);
 
 #endif /* INTTERRUPT_H_ */

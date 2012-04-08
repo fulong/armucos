@@ -1,6 +1,7 @@
 .globl OSStartHighRdy
 .globl OSIntCtxSw
-.globl OS_TASK_SW
+
+.globl _OS_TASK_SW
 OSStartHighRdy:
 	ldr r4,=OSTCBCur	/*得到当前任务TCB地址*/
 	ldr r5,=OSTCBHighRdy /*得到最高优先级任务TCB地址*/
@@ -9,11 +10,11 @@ OSStartHighRdy:
 	ldr sp,[r5]		//转移到新的堆栈中
 
 	str r5,[r4]		//设置新的当前任务TCB地址
-	ldmfd sp!,{r4}
+	ldmia sp!,{r4}
 	msr spsr,r4
-	ldmfd sp!,{r4}	//处于SVC32mode
+	ldmia sp!,{r4}	//处于SVC32mode
 	msr cpsr,r4
-	ldmfd sp!,{r0-r12,lr,pc}//运行新的任务
+	ldmia sp!,{r0-r12,lr,pc}//运行新的任务
 
 OSIntCtxSw:
 	add r7,sp,#16	//保存寄存器指针
@@ -55,7 +56,7 @@ OSIntCtxSw:
 	msr cpsr,r4
 	ldmfd sp!,{r0-r12,lr,pc}
 
-OS_TASK_SW:
+_OS_TASK_SW:
 	stmfd sp!,{lr}
 	stmfd sp!,{lr}
 	stmfd sp!,{r0-r12}
@@ -79,9 +80,9 @@ OS_TASK_SW:
 
 	str r6,[r4]
 
-	ldmfd sp!,{r4}
+	ldmia sp!,{r4}
 	msr spsr,r4
-	ldmfd sp!,{r4}
+	ldmia sp!,{r4}
 	msr cpsr,r4
 
-	ldmfd sp!,{r0-r12,lr,pc}
+	ldmia sp!,{r0-r12,lr,pc}

@@ -109,6 +109,7 @@ void  OSTaskDelHook (OS_TCB *ptcb)
 #if OS_CPU_HOOKS_EN > 0 && OS_VERSION >= 251
 void  OSTaskIdleHook (void)
 {
+	putc_string("now in the lowest prio task!\r\n");
 }
 #endif
 
@@ -184,8 +185,8 @@ OS_STK  *OSTaskStkInit (void (*task)(void *pd), void *pdata, OS_STK *ptos, INT16
     *stk-- = 0;                /* r2                                             */
     *stk-- = 0;                /* r1                                             */
     *stk-- = (INT32U)pdata;    /* r0 */
-    *stk-- = 0;                /* cpsr supmode */
-    *stk-- = 0;                /* spsr supmode*/
+    *stk-- = 0x1f;                /* cpsr sysrmode */
+    *stk = 0x1f;                /* spsr sysmode*/
     return ((OS_STK *)stk);
 }
 

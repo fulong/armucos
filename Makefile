@@ -20,7 +20,7 @@ start_code.compiled: ./start_code/*.S  ./start_code/*.h
 	@${RM} $@
 	@touch $@
 #######################################################
-task.compiled: ./task/*.c ./task/*.h
+task.compiled: ./task/*.c ./task/*.h ./task/app_project/*.c ./task/app_project/*.h
 	@make -C task
 	@${RM} $@
 	@touch $@

@@ -11,6 +11,7 @@
 #define SVCMODE              0x13
 #define ABORTMODE            0x17
 #define UNDEFMODE            0x1b
+#define SYSMODE				 0x1f
 #define MODEMASK             0x1f
 #define NOINT                0xc0
 
@@ -114,7 +115,7 @@ nand_boot_beg:
 
   	mrs     r0,cpsr
 	bic     r0,r0,#MODEMASK
-	orr     r1,r0,#USERMODE
+	orr     r1,r0,#SYSMODE
 	bic		r1,r1,#NOINT
 	msr     cpsr_cxsf,r1            //UserMode
 	ldr     sp, =UserStack          // UserStack=0x33FF_5C00
@@ -215,7 +216,10 @@ software_interrupt:
 //        get_bad_stack
 //        bad_save_user_regs
 //        bl      do_software_interrupt
-        bl      software_interrupt
+		sub r1,lr,#4
+		ldr r0,[r1]
+
+        b      software_handle
 //		b OS_TASK_SW
         .align  5
 prefetch_abort:
@@ -269,7 +273,7 @@ fiq:
 //        bad_save_user_regs
 //        bl      do_fiq
 		sub lr,lr,#4
-		stmdb sp!,{r0-r7,lr}
+		stmfd sp!,{r0-r7,lr}
 		bl fiq_handle
 		ldmia sp!,{r0-r7,pc}^
 /*		bl fiq*/

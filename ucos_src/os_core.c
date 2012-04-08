@@ -65,7 +65,9 @@ static  void  OS_InitEventList(void);
 static  void  OS_InitMisc(void);
 static  void  OS_InitRdyList(void);
 static  void  OS_InitTaskIdle(void);
+#if OS_TASK_STAT_EN > 0
 static  void  OS_InitTaskStat(void);
+#endif
 static  void  OS_InitTCBList(void);
 
 /*$PAGE*/
@@ -294,7 +296,9 @@ void  OSStart (void)
 {
     INT8U y;
     INT8U x;
-
+#ifdef __DEBUG__
+	INT8U debug_num[] = {'0','x','0','0','0','0','0','0','0','0',0};
+#endif
 
     if (OSRunning == FALSE) {
         y             = OSUnMapTbl[OSRdyGrp];        /* Find highest priority's task priority number   */
@@ -303,6 +307,14 @@ void  OSStart (void)
         OSPrioCur     = OSPrioHighRdy;
         OSTCBHighRdy  = OSTCBPrioTbl[OSPrioHighRdy]; /* Point to highest priority task ready to run    */
         OSTCBCur      = OSTCBHighRdy;
+#ifdef __DEBUG__
+	putc_string("\n\r");
+	putc_string("OSStartHighRdy() enter");
+	putc_string("\n\r");
+	putc_string("OSPrioHighRdy:  ");
+	num_to_char(OSPrioHighRdy,debug_num);
+	putc_string(debug_num);
+#endif
         OSStartHighRdy();                            /* Execute target specific code to start task     */
     }
 }
@@ -674,7 +686,7 @@ static  void  OS_InitMisc (void)
     OSStatRdy     = FALSE;                                       /* Statistic task is not ready              */
 #endif
 }
-/*$PAGE*/
+/*$PAGE*/
 /*
 *********************************************************************************************************
 *                                             INITIALIZATION

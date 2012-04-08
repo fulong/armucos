@@ -208,3 +208,11 @@ void fiq_handle(void)
     INTPND = temp;
 
 }
+void software_handle(trap_num)
+{
+	switch(trap_num){
+	case 0x80 :	_OS_TASK_SW();
+				break;
+	default:break;
+	}
+}

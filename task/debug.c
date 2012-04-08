@@ -36,7 +36,7 @@ INT8U num_to_char(INT32U num,INT8U * display_num)
 
 	INT32U i;
 
-	for(i=9;i>0;i--)
+	for(i=9;i>1;i--)
 	{
 		*(display_num+i) = num_map[num % 16];
 		num /= 16;

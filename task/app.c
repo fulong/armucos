@@ -17,6 +17,7 @@
  */
 
 #include "led.h"
+#include "app_project/testtask.h"
 #include "../dev/uart.h"
 #include "../dev/clock.h"
 #include "../dev/interrupt.h"
@@ -29,8 +30,28 @@
 INT32S main(void)
 {
 #ifdef __DEBUG__
+	INT32U i;
+	INT8U debug_num[] = {'0','x','0','0','0','0','0','0','0','0',0};
 	putc_string("\n\r");
 	putc_string("now be into the ucos");
 #endif
+
+#ifdef __DEBUG__
+	putc_string("\n\r");
+	putc_string("OSInit() enter");
+#endif
+	OSInit();
+
+#ifdef __DEBUG__
+	putc_string("\n\r");
+	putc_string("OSStart() enter");
+#endif
+OSTaskCreate(TestTask,(void *)0,&TestTaskStk[99],0);
+
+	OSStart();
+
+while(1);
+
 	return 0;
 }
+

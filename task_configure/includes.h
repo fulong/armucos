@@ -12,6 +12,7 @@
 
 #include 	<string.h>
 
+#include	"../task/debug.h"
 #include    "../s3c2440/os_cpu.h"
 #include    "../task_configure/os_cfg.h"
 #include    "../ucos_src/ucos_ii.h"

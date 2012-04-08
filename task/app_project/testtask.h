@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  debug.h
+ *       Filename:  testtask.h
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  6:08:39 PM  Apr 1, 2012
+ *        Created:  11:48:08 PM  Apr 7, 2012
  *       Revision:  none
  *       Compiler:  arm
  *
@@ -16,18 +16,11 @@
  * =====================================================================================
  */
 
+#ifndef TESTTASK_H_
+#define TESTTASK_H_
 
-#ifndef DEBUG_H_
-#define DEBUG_H_
-#include "../task_configure/includes.h"
-#include "../dev/uart.h"
+#include "../debug.h"
+OS_STK	TestTaskStk[100];
+extern void TestTask(void *pdata);
 
-
-#define put_char(ch) 		UTXH0 = (ch);\
-		while(!(UTRSTAT0 & (1<<2)));
-
-extern void putc_string(char * str);
-extern INT8U num_to_char(INT32U num,INT8U * display_num);
-
-
-#endif /* DEBUG_H_ */
+#endif /* TESTTASK_H_ */
